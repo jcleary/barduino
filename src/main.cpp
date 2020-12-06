@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "cocktails.h"
 #include "pumps.h"
+#include "mixer.h"
 
 #define NO_KEY 0
 
@@ -31,7 +31,6 @@ void setup() {
   setupPumps();
 }
 
-
 void loop() {  
   char key = getKey(); 
 
@@ -40,7 +39,7 @@ void loop() {
       drinkSelection = "";  
     }
     else if (key == '#') {        
-      mixCocktail();
+      mixCocktail(drinkSelection);
       drinkSelection = "";
     }
     else {
@@ -50,26 +49,6 @@ void loop() {
 }
 
 
-void dispense(Cocktail drink) {
-  for(byte i = 0; i < sizeof(drink.recipe); i++) {
-    if (drink.recipe[i][0] > 0) {
-      digitalWrite(drink.recipe[i][0], HIGH);    
-    }
-  }
-  delay(1500);
-
-  for(byte i = 2; i <= 13; i++) {
-    digitalWrite(i, LOW); 
-  }  
-}
-
-
-void mixCocktail() {  
-  Cocktail c = getCocktailByCode(drinkSelection);
-  if ( c.code != "" ) {
-    dispense(c);
-  }
-}
 
 unsigned int getKey() {
   keyVal1 = analogRead(keyPadAnalogPin); Serial.println(keyVal1); 

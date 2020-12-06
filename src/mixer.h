@@ -6,6 +6,4 @@ struct Cocktail {
   int recipe[5][2];
 } ;
 
-Cocktail nilDrink = { "", {} };
-
-Cocktail getCocktailByCode(String code);
+void mixCocktail(String drinkSelection);
