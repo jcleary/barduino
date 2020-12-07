@@ -27,9 +27,19 @@ void setup()
   Serial.begin(9600);
   drinkSelection = String();
   setupPumps();
+  setupDrinks();
 }
 
 void loop()
+{    
+  mixCocktail("23");
+
+  delay(1000);
+
+
+}
+
+void old_loop()
 {
   char key = getKey();
 

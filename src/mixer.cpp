@@ -2,24 +2,39 @@
 #include "pumps.h"
 #include "mixer.h"
 
+Cocktail drinks[TOTAL_DRINKS];
+
+void flashGreen();
+
+void setupDrinks()
+{
+    int i = 0;
+
+    // Vodka & Coke
+    drinks[i++] = {
+        "22",
+        {
+            {coke, 25},
+            {vodka, 250},
+            {0, 100},
+            {0,0},
+            {0,0}
+        }};
+
+    // Gin & Tonic
+    drinks[i++] = {
+        "23",
+        {
+            {gin, 25},
+            {tonic, 100}
+        }};
+};
+
 Cocktail getCocktailByCode(String code)
 {
-    Cocktail drinks[80] = {
-        {// Vodka & Coke
-         "22",
-         {
-             {vodka, 25},
-             {coke, 250},
-             {lemonade, 100},
-         }},
-        {// Gin & Tonic
-         "23",
-         {{gin, 25},
-          {tonic, 250}}}};
-
     Cocktail drink;
 
-    for (byte i = 0; i < sizeof(drinks); i++)
+    for (byte i = 0; i < TOTAL_DRINKS; i++)
     {
         if (drinks[i].code == code)
         {
@@ -31,7 +46,7 @@ Cocktail getCocktailByCode(String code)
 
 void dispense(Cocktail drink)
 {
-    for (byte i = 0; i < sizeof(drink.recipe); i++)
+    for (byte i = 0; i < TOTAL_INGREDIENTS; i++)
     {
         if (drink.recipe[i][0] > 0)
         {
@@ -52,5 +67,16 @@ void mixCocktail(String drinkSelection)
     if (c.code != "")
     {
         dispense(c);
+        flashGreen();
     }
+}
+
+void flashGreen()
+{
+    int testPin = mix8;
+
+    digitalWrite(testPin, HIGH);
+    delay(500);
+    digitalWrite(testPin, LOW);
+    delay(500);
 }
