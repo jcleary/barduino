@@ -4,7 +4,7 @@
 
 Cocktail drinks[TOTAL_DRINKS];
 
-void flashGreen();
+
 
 void setupDrinks()
 {
@@ -14,19 +14,16 @@ void setupDrinks()
     drinks[i++] = {
         "22",
         {
-            {coke, 25},
-            {vodka, 250},
-            {0, 100},
-            {0,0},
-            {0,0}
+            {coke, 250},
+            {vodka, 25}
         }};
 
     // Gin & Tonic
     drinks[i++] = {
         "23",
         {
-            {gin, 25},
-            {tonic, 100}
+            {gin, 50},
+            {tonic, 250}
         }};
 };
 
@@ -46,14 +43,37 @@ Cocktail getCocktailByCode(String code)
 
 void dispense(Cocktail drink)
 {
+    int recipe[TOTAL_INGREDIENTS][2];
+    int max = 0;
+
     for (byte i = 0; i < TOTAL_INGREDIENTS; i++)
     {
+        recipe[i][0] = drink.recipe[i][0];
+        recipe[i][1] = drink.recipe[i][1];
+
         if (drink.recipe[i][0] > 0)
         {
             digitalWrite(drink.recipe[i][0], HIGH);
+            if (drink.recipe[i][1] > max) {
+                max = drink.recipe[i][1];
+            }            
         }
     }
-    delay(1500);
+
+    for(;max > 0; max --) {
+
+        delay(MILLISECONDS_TO_MLS); 
+        for (byte i = 0; i < TOTAL_INGREDIENTS; i++)
+        {
+            if (recipe[i][1] > 0) {
+                recipe[i][1]--;
+            } else {
+                digitalWrite(recipe[i][0], LOW);
+            }
+        }
+        
+    }
+    
 
     for (byte i = 2; i <= 13; i++)
     {
@@ -76,7 +96,7 @@ void flashGreen()
     int testPin = mix8;
 
     digitalWrite(testPin, HIGH);
-    delay(500);
+    delay(100);
     digitalWrite(testPin, LOW);
-    delay(500);
+    delay(100);
 }
