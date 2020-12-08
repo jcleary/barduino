@@ -2,9 +2,7 @@
 #include "pumps.h"
 #include "mixer.h"
 
-Cocktail drinks[TOTAL_DRINKS];
-
-
+Cocktail drinks[MAX_DRINKS];
 
 void setupDrinks()
 {
@@ -31,22 +29,20 @@ Cocktail getCocktailByCode(String code)
 {
     Cocktail drink;
 
-    for (byte i = 0; i < TOTAL_DRINKS; i++)
+    for (byte i = 0; i < MAX_DRINKS; i++)
     {
-        if (drinks[i].code == code)
-        {
-            drink = drinks[i];
-        }
+        if (drinks[i].code == code)        
+            drink = drinks[i];        
     }
     return (drink);
 };
 
 void dispense(Cocktail drink)
 {
-    int recipe[TOTAL_INGREDIENTS][2];
-    int max = 0;
+    int recipe[MAX_INGREDIENTS][2];
+    int maxVolume = 0;
 
-    for (byte i = 0; i < TOTAL_INGREDIENTS; i++)
+    for (byte i = 0; i < MAX_INGREDIENTS; i++)
     {
         recipe[i][0] = drink.recipe[i][0];
         recipe[i][1] = drink.recipe[i][1];
@@ -54,16 +50,16 @@ void dispense(Cocktail drink)
         if (drink.recipe[i][0] > 0)
         {
             digitalWrite(drink.recipe[i][0], HIGH);
-            if (drink.recipe[i][1] > max) {
-                max = drink.recipe[i][1];
-            }            
+            //if (drink.recipe[i][1] > maxVolume) {
+                maxVolume = max(drink.recipe[i][1], maxVolume);
+            //}            
         }
     }
 
-    for(;max > 0; max --) {
+    for(;maxVolume > 0; maxVolume --) {
 
         delay(MILLISECONDS_TO_MLS); 
-        for (byte i = 0; i < TOTAL_INGREDIENTS; i++)
+        for (byte i = 0; i < MAX_INGREDIENTS; i++)
         {
             if (recipe[i][1] > 0) {
                 recipe[i][1]--;
@@ -71,7 +67,6 @@ void dispense(Cocktail drink)
                 digitalWrite(recipe[i][0], LOW);
             }
         }
-        
     }
     
 
@@ -83,13 +78,15 @@ void dispense(Cocktail drink)
 
 void mixCocktail(String drinkSelection)
 {
+    Serial.print("Searching for drink: ");
+    Serial.println(drinkSelection);
+
     Cocktail c = getCocktailByCode(drinkSelection);
-    if (c.code != "")
-    {
-        dispense(c);
-        flashGreen();
-    }
+    if (c.code != "")    
+        dispense(c);        
+    
 }
+
 
 void flashGreen()
 {
