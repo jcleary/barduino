@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
 
-const int MAX_DRINKS = 10;
+const int MAX_DRINKS = 9;
 const int MAX_INGREDIENTS = 5; 
 const int MILLISECONDS_TO_MLS = 20;
 

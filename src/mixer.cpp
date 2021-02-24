@@ -55,6 +55,32 @@ void setupDrinks()
             {gin, 50},
             {tonic, 250}
         }};    
+
+    drinks[i++] = {
+        "27",
+        "Mojito",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};  
+
+    drinks[i++] = {
+        "27",
+        "Old Fashioned",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};    
+
+   drinks[i++] = {
+        "27",
+        "Bellini",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};            
+
+
 };
 
 Cocktail getCocktailByCode(String code)
