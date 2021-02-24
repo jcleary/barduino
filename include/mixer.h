@@ -1,12 +1,13 @@
 #pragma once
 #include <Arduino.h>
 
-const int MAX_DRINKS = 40;
+const int MAX_DRINKS = 10;
 const int MAX_INGREDIENTS = 5; 
 const int MILLISECONDS_TO_MLS = 20;
 
 struct Cocktail {
   String code;  
+  String name;
   int recipe[MAX_INGREDIENTS][2];
 } ;
 

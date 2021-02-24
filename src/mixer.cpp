@@ -8,21 +8,53 @@ void setupDrinks()
 {
     int i = 0;
 
-    // Vodka & Coke
     drinks[i++] = {
-        "22",
+        "22",   
+        "Vodka & Coke",
         {
             {coke, 250},
             {vodka, 25}
         }};
 
-    // Gin & Tonic
     drinks[i++] = {
         "23",
+        "Gin & Tonic",
         {
             {gin, 50},
             {tonic, 250}
         }};
+
+    drinks[i++] = {
+        "24",
+        "Zombie",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};    
+
+    drinks[i++] = {
+        "25",
+        "Sex On The Beach",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};  
+
+    drinks[i++] = {
+        "26",
+        "Margarita",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};        
+
+    drinks[i++] = {
+        "27",
+        "Cosmopolitan",
+        {
+            {gin, 50},
+            {tonic, 250}
+        }};    
 };
 
 Cocktail getCocktailByCode(String code)
