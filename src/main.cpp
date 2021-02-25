@@ -57,6 +57,7 @@ void loop()
   } else if (clicked == 0) {
     confirmationScreen();
     drawScreen();
+    delay(500);
   }
 
   delay(10);
