@@ -13,7 +13,11 @@ const int downThreshold = 622;
 const int leftThreshold = 422;
 const int rightThreshold = 622;
 
-String drinkSelection;
+const int motor1pin1 = 30;
+const int motor1pin2 = 31;
+
+const int motor2pin1 = 32;
+const int motor2pin2 = 33;
 
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27,20,4);  
 
@@ -35,11 +39,12 @@ void setup()
   lcd.init();   
   lcd.backlight();
   
-  drinkSelection = String();
-
   setupPumps();
-  setupDrinks();
+  loadDrinks();
   drawScreen();
+
+  pinMode(motor1pin1, OUTPUT);
+  pinMode(motor1pin2, OUTPUT);
 }
 
 void loop() 
@@ -58,6 +63,28 @@ void loop()
     confirmationScreen();
     drawScreen();
     delay(500);
+  } else if (xPosition > rightThreshold) {
+    Serial.println("pumping 1 & 2");
+    digitalWrite(motor1pin1, HIGH);
+    digitalWrite(motor1pin2, LOW);
+    digitalWrite(motor2pin1, HIGH);
+    digitalWrite(motor2pin2, LOW);
+    delay(1000);
+
+    Serial.println("stopped");
+    digitalWrite(motor1pin1, LOW);
+    digitalWrite(motor2pin1, LOW);
+  } else if (xPosition < leftThreshold) {
+    Serial.println("reversing 1 & 2");
+    digitalWrite(motor1pin1, LOW);
+    digitalWrite(motor1pin2, HIGH);
+    digitalWrite(motor2pin1, LOW);
+    digitalWrite(motor2pin2, HIGH);
+    delay(1000);
+
+    Serial.println("stopped");
+    digitalWrite(motor1pin2, LOW);
+    digitalWrite(motor2pin2, LOW);
   }
 
   delay(10);
@@ -130,11 +157,17 @@ void pour()
   lcd.setCursor(0,1);
   lcd.print(drinks[selection].name);
 
+  dispense(drinks[selection]);
+
   for(int i=0; i < 20; i++) {
     lcd.setCursor(i,3);
     lcd.print('>');
     delay(200);
   }
+
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, LOW);
+
 }
 
 void readJoystick()

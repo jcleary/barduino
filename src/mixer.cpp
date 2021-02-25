@@ -4,36 +4,33 @@
 
 Cocktail drinks[MAX_DRINKS];
 
-void setupDrinks()
+
+void loadDrinks()
 {
     int i = 0;
 
     drinks[i++] = {
-        "22",   
-        "Vodka & Coke",
+        "Vodka & Orange",
         {
-            {coke, 250},
-            {vodka, 25}
+            {orange, 280},
+            {vodka, 50}
         }};
 
     drinks[i++] = {
-        "23",
-        "Gin & Tonic",
+        "Not Vodka Orange",
         {
             {gin, 50},
             {tonic, 250}
         }};
 
     drinks[i++] = {
-        "24",
-        "Zombie",
+        "Not Vodka Orange",
         {
             {gin, 50},
             {tonic, 250}
         }};    
 
     drinks[i++] = {
-        "25",
         "Sex On The Beach",
         {
             {gin, 50},
@@ -41,7 +38,6 @@ void setupDrinks()
         }};  
 
     drinks[i++] = {
-        "26",
         "Margarita",
         {
             {gin, 50},
@@ -49,7 +45,6 @@ void setupDrinks()
         }};        
 
     drinks[i++] = {
-        "27",
         "Cosmopolitan",
         {
             {gin, 50},
@@ -57,7 +52,6 @@ void setupDrinks()
         }};    
 
     drinks[i++] = {
-        "27",
         "Mojito",
         {
             {gin, 50},
@@ -65,7 +59,6 @@ void setupDrinks()
         }};  
 
     drinks[i++] = {
-        "27",
         "Old Fashioned",
         {
             {gin, 50},
@@ -73,26 +66,12 @@ void setupDrinks()
         }};    
 
    drinks[i++] = {
-        "27",
         "Bellini",
         {
             {gin, 50},
             {tonic, 250}
         }};            
 
-
-};
-
-Cocktail getCocktailByCode(String code)
-{
-    Cocktail drink;
-
-    for (byte i = 0; i < MAX_DRINKS; i++)
-    {
-        if (drinks[i].code == code)        
-            drink = drinks[i];        
-    }
-    return (drink);
 };
 
 void dispense(Cocktail drink)
@@ -132,26 +111,4 @@ void dispense(Cocktail drink)
     {
         digitalWrite(i, LOW);
     }
-}
-
-void mixCocktail(String drinkSelection)
-{
-    Serial.print("Searching for drink: ");
-    Serial.println(drinkSelection);
-
-    Cocktail c = getCocktailByCode(drinkSelection);
-    if (c.code != "")    
-        dispense(c);        
-    
-}
-
-
-void flashGreen()
-{
-    int testPin = mix8;
-
-    digitalWrite(testPin, HIGH);
-    delay(100);
-    digitalWrite(testPin, LOW);
-    delay(100);
 }

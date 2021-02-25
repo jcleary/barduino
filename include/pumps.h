@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
 
-const byte spirit1 = 2;
+const byte spirit1 = 30;
 const byte spirit2 = 3;
 const byte spirit3 = 4;
 const byte spirit4 = 5;
@@ -16,10 +16,11 @@ const byte mix7 = 12;
 const byte mix8 = 13;
 
 // Spirits
-const byte vodka = spirit1;
+const byte vodka = 30;
 const byte gin = spirit2;
 
 // Mixers
+const byte orange = 32;
 const byte coke = mix1;
 const byte tonic = mix2;
 const byte lemonade = mix8;
