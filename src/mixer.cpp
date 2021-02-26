@@ -17,14 +17,7 @@ void loadDrinks()
         }};
 
     drinks[i++] = {
-        "Not Vodka Orange",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};
-
-    drinks[i++] = {
-        "Not Vodka Orange",
+        "Gan & Tonic",
         {
             {gin, 50},
             {tonic, 250}

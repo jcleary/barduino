@@ -51,12 +51,12 @@ void loop()
 {
   readJoystick();
 
-  if (yPosition < upThreshold) {     
-    selection = (selection + MAX_DRINKS - 1) % MAX_DRINKS;
+  if (yPosition < upThreshold && selection > 0) {     
+    selection -= 1;
     drawScreen();
     delay(500);
-  } else if (yPosition > downThreshold) {    
-    selection = (selection + 1) % MAX_DRINKS;
+  } else if (yPosition > downThreshold && selection < (MAX_DRINKS - 1)) {    
+    selection += 1;
     drawScreen();
     delay(500);
   } else if (clicked == 0) {
@@ -141,9 +141,11 @@ void drawScreen()
   lcd.setCursor(0, 2);
   lcd.print(">");
   for(int i = 0; i < 3; i++) {
-    drink = (i + selection + MAX_DRINKS - 1) % MAX_DRINKS;
-    lcd.setCursor(1, i+1);
-    lcd.print(drinks[drink].name);
+    drink = selection - 1 + i;
+    if (drink >= 0 && drink < (MAX_DRINKS)) {
+      lcd.setCursor(1, i+1);
+      lcd.print(drinks[drink].name);
+    }
   }
 }
 
