@@ -4,68 +4,31 @@
 
 Cocktail drinks[MAX_DRINKS];
 
+int nextDrink = 0;
+
+void addDrink(Cocktail newDrink);
 
 void loadDrinks()
 {
-    int i = 0;
-
-    drinks[i++] = {
-        "Vodka & Orange",
-        {
-            {orange, 280},
-            {vodka, 50}
-        }};
-
-    drinks[i++] = {
-        "Gan & Tonic",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};    
-
-    drinks[i++] = {
-        "Sex On The Beach",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};  
-
-    drinks[i++] = {
-        "Margarita",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};        
-
-    drinks[i++] = {
-        "Cosmopolitan",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};    
-
-    drinks[i++] = {
-        "Mojito",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};  
-
-    drinks[i++] = {
-        "Old Fashioned",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};    
-
-   drinks[i++] = {
-        "Bellini",
-        {
-            {gin, 50},
-            {tonic, 250}
-        }};            
-
+    addDrink({"Vodka & Orange", {{ vodka, 50}, {orange, 280}}});    
+    addDrink({"Gin & Tonic", {{gin, 50}, {tonic, 280}}});    
+    addDrink({"Sex On The Beach", {}});  
+    addDrink({"Margarita", {}});        
+    addDrink({"Cosmopolitan", {}});    
+    addDrink({"Mojito", {}});  
+    addDrink({"Old Fashioned", {}});
+    addDrink({"Bellini", {}});          
 };
+
+void addDrink(Cocktail newDrink) {
+    if (nextDrink >= MAX_DRINKS) {
+        Serial.println("ERROR: dirnk was not added");
+    } else {
+        Serial.println("Adding " + newDrink.name);
+        drinks[nextDrink] = newDrink;
+        nextDrink++;
+    }
+}
 
 void dispense(Cocktail drink)
 {
