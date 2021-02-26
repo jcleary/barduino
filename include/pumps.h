@@ -16,5 +16,3 @@ void setupPumps();
 void pumpOn(byte pumpNo);
 void pumpOff(byte pumpNo);
 void pumpReverse(byte pumpNo);
-byte pumpPin1(byte pumpNo);
-byte pumpPin2(byte pumpNo);

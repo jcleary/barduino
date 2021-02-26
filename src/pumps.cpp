@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "pumps.h"
 
+byte pumpPin1(byte pumpNo);
+byte pumpPin2(byte pumpNo);
+
 void setupPumps()
 {  
   for (byte pumpNo = 0; pumpNo < PUMPS; pumpNo++) {
