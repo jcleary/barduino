@@ -3,9 +3,9 @@
 
 void setupPumps()
 {  
-  for (byte i = 0; i < PUMPS; i++) {
-    pinMode(pump0pin0 + (i * 2), OUTPUT);
-    pinMode(pump0pin0 + (i * 2) + 1, OUTPUT);
+  for (byte pumpNo = 0; pumpNo < PUMPS; pumpNo++) {
+    pinMode(pumpPin1(pumpNo), OUTPUT);
+    pinMode(pumpPin2(pumpNo), OUTPUT);
   }
 }
 
