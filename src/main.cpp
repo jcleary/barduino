@@ -64,27 +64,19 @@ void loop()
     drawScreen();
     delay(500);
   } else if (xPosition > rightThreshold) {
-    Serial.println("pumping 1 & 2");
-    digitalWrite(motor1pin1, HIGH);
-    digitalWrite(motor1pin2, LOW);
-    digitalWrite(motor2pin1, HIGH);
-    digitalWrite(motor2pin2, LOW);
+    pumpOn(0);
+    pumpOn(1);
     delay(1000);
 
-    Serial.println("stopped");
-    digitalWrite(motor1pin1, LOW);
-    digitalWrite(motor2pin1, LOW);
+    pumpOff(0);
+    pumpOff(1);
   } else if (xPosition < leftThreshold) {
-    Serial.println("reversing 1 & 2");
-    digitalWrite(motor1pin1, LOW);
-    digitalWrite(motor1pin2, HIGH);
-    digitalWrite(motor2pin1, LOW);
-    digitalWrite(motor2pin2, HIGH);
+    pumpReverse(0);
+    pumpReverse(1);
     delay(1000);
 
-    Serial.println("stopped");
-    digitalWrite(motor1pin2, LOW);
-    digitalWrite(motor2pin2, LOW);
+    pumpOff(0);
+    pumpOff(1);
   }
 
   delay(10);

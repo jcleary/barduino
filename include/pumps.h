@@ -1,30 +1,20 @@
 #pragma once
 #include <Arduino.h>
 
-const byte spirit1 = 30;
-const byte spirit2 = 3;
-const byte spirit3 = 4;
-const byte spirit4 = 5;
+const byte vodka      = 0;
+const byte orange     = 1;
+const byte gin        = 2;
+const byte coke       = 3;
+const byte tonic      = 4;
+const byte lemonade   = 5;
 
-const byte mix1 = 6;
-const byte mix2 = 7;
-const byte mix3 = 8;
-const byte mix4 = 9;
-const byte mix5 = 10;
-const byte mix6 = 11;
-const byte mix7 = 12;
-const byte mix8 = 13;
+const int PUMPS = 8;
 
-// Spirits
-const byte vodka = 30;
-const byte gin = spirit2;
-
-// Mixers
-const byte orange = 32;
-const byte coke = mix1;
-const byte tonic = mix2;
-const byte lemonade = mix8;
-
-const byte PUMPS = 12;
+const byte pump0pin0 = 30;
 
 void setupPumps();
+void pumpOn(byte pumpNo);
+void pumpOff(byte pumpNo);
+void pumpReverse(byte pumpNo);
+byte pumpPin1(byte pumpNo);
+byte pumpPin2(byte pumpNo);
