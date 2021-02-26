@@ -5,19 +5,16 @@
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 
+// pins
 const int yAxis = 7;
 const int xAxis = 6;
 const int joyClick = 52;
+
+// thresholds
 const int upThreshold = 422;
 const int downThreshold = 622;
 const int leftThreshold = 422;
 const int rightThreshold = 622;
-
-const int motor1pin1 = 30;
-const int motor1pin2 = 31;
-
-const int motor2pin1 = 32;
-const int motor2pin2 = 33;
 
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27,20,4);  
 
@@ -30,21 +27,17 @@ void drawScreen();
 void confirmationScreen();
 void readJoystick();
 void pour();
+void welcomeScreen();
 
 void setup()
 {
   Serial.begin(115200);
   pinMode(joyClick, INPUT_PULLUP);
 
-  lcd.init();   
-  lcd.backlight();
-  
+  welcomeScreen();
   setupPumps();
   loadDrinks();
   drawScreen();
-
-  pinMode(motor1pin1, OUTPUT);
-  pinMode(motor1pin2, OUTPUT);
 }
 
 void loop() 
@@ -141,9 +134,25 @@ void drawScreen()
   }
 }
 
+void welcomeScreen()
+{
+  lcd.init();   
+  lcd.backlight();
+
+  lcd.clear();
+  lcd.setCursor(3,1);
+  lcd.print("Barduino v0.8");
+  for(byte i=0; i < 3; i++) {
+    lcd.setCursor(i+8,2);
+    lcd.print(".");
+    delay(1000);
+  }
+}
+
 
 void pour()
 {
+  // TODO: rewrite
   lcd.clear();
 
   lcd.setCursor(0,0);
@@ -158,10 +167,6 @@ void pour()
     lcd.print('>');
     delay(200);
   }
-
-  digitalWrite(motor1pin1, LOW);
-  digitalWrite(motor1pin2, LOW);
-
 }
 
 void readJoystick()
