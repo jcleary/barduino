@@ -2,10 +2,9 @@
 #include "pumps.h"
 #include "mixer.h"
 #include "joystick.h"
+#include "lcd.h"
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-
-LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 20, 4);
 
 int selection = 0;
 
