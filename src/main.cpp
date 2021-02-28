@@ -22,6 +22,7 @@ void setup()
   welcomeScreen();
   setupPumps();
   loadDrinks();
+  setupLcd();
   selectDrinkScreen();
 }
 
@@ -146,9 +147,6 @@ void selectDrinkScreen()
 
 void welcomeScreen()
 {
-  lcd.init();
-  lcd.backlight();
-
   lcd.clear();
   lcd.setCursor(3, 1);
   lcd.print("Barduino v0.8");
