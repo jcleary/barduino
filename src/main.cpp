@@ -2,6 +2,7 @@
 #include "pumps.h"
 #include "mixer.h"
 #include "joystick.h"
+#include "maintenance.h"
 #include "lcd.h"
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
@@ -12,7 +13,6 @@ void selectDrinkScreen();
 void confirmationScreen();
 void readJoystick();
 void welcomeScreen();
-void maintenanceMenu();
 
 void setup()
 {
@@ -160,10 +160,3 @@ void welcomeScreen()
   }
 }
 
-void maintenanceMenu()
-{
-  lcd.clear();
-  lcd.setCursor(2, 0);
-  lcd.print("Maintenance Menu");
-  delay(3000);
-}
