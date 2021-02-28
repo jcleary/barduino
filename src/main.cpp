@@ -19,10 +19,10 @@ void setup()
   Serial.begin(115200);
   pinMode(joyClick, INPUT_PULLUP);
 
-  welcomeScreen();
   setupPumps();
   loadDrinks();
   setupLcd();
+  welcomeScreen();
   selectDrinkScreen();
 }
 
@@ -150,12 +150,11 @@ void welcomeScreen()
 {
   lcd.clear();
   lcd.setCursor(3, 1);
-  lcd.print("Barduino v0.8");
+  lcd.print("Barduino v1.0");
   for (byte i = 0; i < 3; i++)
   {
     lcd.setCursor(i + 8, 2);
     lcd.print(".");
-    delay(1000);
+    delay(500);
   }
 }
-
