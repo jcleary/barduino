@@ -44,9 +44,9 @@ void loop()
   }
   else if (clicked == 0)
   {
+    waitForDepress();
     confirmationScreen();
     selectDrinkScreen();
-    delay(500);
   }
   else if (xPosition > rightThreshold)
   {
@@ -96,6 +96,7 @@ void confirmationScreen()
 
     if (clicked == 0)
     {
+      waitForDepress();
       if (select == 1)
       {
         pour(drinks[selection], lcd);

@@ -17,3 +17,4 @@ extern int yPosition;
 extern int xPosition;
 
 void readJoystick();
+void waitForDepress();

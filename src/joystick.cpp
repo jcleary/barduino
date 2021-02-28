@@ -11,3 +11,10 @@ void readJoystick()
   xPosition = analogRead(xAxis);
   clicked = digitalRead(joyClick);
 }
+
+void waitForDepress()
+{
+  do {
+    readJoystick();
+  } while (clicked == 0);
+}
