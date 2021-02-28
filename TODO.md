@@ -1,6 +1,5 @@
 # TODO
 
-- use nextDrink instead of maxDrinks for showing menu
 - remove kaypad code
 - beep when done
 - fix priming 
