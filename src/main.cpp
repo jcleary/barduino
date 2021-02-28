@@ -34,13 +34,13 @@ void loop()
   {
     selection -= 1;
     selectDrinkScreen();
-    delay(500);
+    delay(200);
   }
   else if (yPosition > downThreshold && selection < lastDrinkId())
   {
     selection += 1;
     selectDrinkScreen();
-    delay(500);
+    delay(200);
   }
   else if (clicked == 0)
   {
