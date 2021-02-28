@@ -1,26 +1,13 @@
 #include <Arduino.h>
 #include "pumps.h"
 #include "mixer.h"
+#include "joystick.h"
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
-
-// pins
-const int yAxis = 7;
-const int xAxis = 6;
-const int joyClick = 52;
-
-// thresholds
-const int upThreshold = 422;
-const int downThreshold = 622;
-const int leftThreshold = 422;
-const int rightThreshold = 622;
 
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27,20,4);  
 
 int selection = 0;
-int yPosition;
-int xPosition;
-int clicked;
 
 void selectDrinkScreen();
 void confirmationScreen();
@@ -153,12 +140,6 @@ void welcomeScreen()
 
 
 
-void readJoystick()
-{
-  yPosition = analogRead(yAxis);
-  xPosition = analogRead(xAxis);
-  clicked = digitalRead(joyClick);
-}
 
 void maintenanceMenu() {
   lcd.clear();
