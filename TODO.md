@@ -1,14 +1,20 @@
 # TODO
 
-- Make sure the drinks pump and stop on time
-- show % and progress when pumping
+- use nextDrink instead of maxDrinks for showing menu
 - remove kaypad code
+- beep when done
+- fix priming 
+- refactor pour code into 2-3 methods
+- move pour into mixer
+
 
 - 5v power supply
 - design and build enclosure
 - get final list of cocktails
+- remove breadboard (maybe get PCB)
 
-- welcome screen (3 seconds)
+- switches for missing drinks - remove them from the menu
+
 
 # Suggestions
 
