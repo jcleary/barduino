@@ -2,6 +2,7 @@
 #include "maintenance.h"
 #include "lcd.h"
 #include "joystick.h"
+#include "pumps.h"
 
 const int MENU_ITEMS = 3;
 String menu[MENU_ITEMS] = {"Prime", "Purge", "Exit"};
@@ -24,25 +25,28 @@ void maintenanceMenu()
     if (yPosition < upThreshold && selection > 0)
     {
       drawMaintenanceMenu(--selection);
-      delay(500);
+      delay(200);
     }
     else if (yPosition > downThreshold && selection < (MENU_ITEMS - 1))
     {
       drawMaintenanceMenu(++selection);
-      delay(500);
-    } else if (clicked == 0) {
+      delay(200);
+    }
+    else if (clicked == 0)
+    {
       waitForDepress();
-      switch(selection) {
-        case 0:
-          primeAllPumps();
-          break;
+      switch (selection)
+      {
+      case 0:
+        primeAllPumps();
+        break;
 
-        case 1:
-          purgeAllPumps();
-          break;
+      case 1:
+        purgeAllPumps();
+        break;
 
-        case 2:
-          return;
+      case 2:
+        return;
       }
     }
 
@@ -70,18 +74,46 @@ void drawMaintenanceMenu(int selection)
   }
 }
 
-void primeAllPumps() 
+void primeAllPumps()
 {
   lcd.clear();
-  lcd.setCursor(6,1);
+  lcd.setCursor(6, 1);
   lcd.print("Priming");
 
+  lcd.setCursor(6, 3);
+  lcd.print("[ Stop ]");
 
+  for (byte i = 0; i < PUMPS; i++)
+    pumpOn(i);
 
+  do
+  {
+    readJoystick();
+  } while (clicked != 0);
+  waitForDepress();
 
+  for (byte i = 0; i < PUMPS; i++)
+    pumpOff(i);
 }
 
 void purgeAllPumps()
 {
+  lcd.clear();
+  lcd.setCursor(6, 1);
+  lcd.print("Purging");
 
+  lcd.setCursor(6, 3);
+  lcd.print("[ Stop ]");
+
+  for (byte i = 0; i < PUMPS; i++)
+    pumpReverse(i);
+  
+  do
+  {
+    readJoystick();
+  } while (clicked != 0);
+  waitForDepress();
+
+  for (byte i = 0; i < PUMPS; i++)
+    pumpOff(i);
 }
