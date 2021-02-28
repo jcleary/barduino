@@ -27,6 +27,7 @@ void selectDrinkScreen();
 void confirmationScreen();
 void readJoystick();
 void welcomeScreen();
+void maintenanceMenu();
 
 void setup()
 {
@@ -56,9 +57,18 @@ void loop()
     selectDrinkScreen();
     delay(500);
   } else if (xPosition > rightThreshold) {
-    for(int i = 0; i < PUMPS; i++) pumpOn(i);
-    delay(1000);
-    for(int i = 0; i < PUMPS; i++) pumpOff(i);
+    int i = 300;
+    do {
+      readJoystick();
+      i--;
+      delay(10);
+    } while (i > 0 && xPosition > rightThreshold);
+    if (i == 0) {
+      maintenanceMenu();
+      selectDrinkScreen();
+    }
+    
+    // for(int i = 0; i < PUMPS; i++) pumpOff(i);
   } else if (xPosition < leftThreshold) {
     for(int i = 0; i < PUMPS; i++) pumpReverse(i);
     delay(1000);
@@ -149,4 +159,11 @@ void readJoystick()
   yPosition = analogRead(yAxis);
   xPosition = analogRead(xAxis);
   clicked = digitalRead(joyClick);
+}
+
+void maintenanceMenu() {
+  lcd.clear();
+  lcd.setCursor(2, 0);
+  lcd.print("Maintenance Menu");
+  delay(3000);
 }
