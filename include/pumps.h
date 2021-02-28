@@ -1,12 +1,13 @@
 #pragma once
 #include <Arduino.h>
 
-const byte vodka      = 0;
-const byte orange     = 1;
-const byte gin        = 2;
-const byte coke       = 3;
-const byte tonic      = 4;
-const byte lemonade   = 5;
+const byte vodka          = 0;
+const byte gin            = 1;
+const byte peach_schnapps = 2;
+
+const byte cranberry  = 5;
+const byte orange     = 6;
+const byte tonic      = 7;
 
 const int PUMPS = 8;
 

@@ -23,10 +23,9 @@ int yPosition;
 int xPosition;
 int clicked;
 
-void drawScreen();
+void selectDrinkScreen();
 void confirmationScreen();
 void readJoystick();
-void pour();
 void welcomeScreen();
 
 void setup()
@@ -37,7 +36,7 @@ void setup()
   welcomeScreen();
   setupPumps();
   loadDrinks();
-  drawScreen();
+  selectDrinkScreen();
 }
 
 void loop() 
@@ -46,30 +45,24 @@ void loop()
 
   if (yPosition < upThreshold && selection > 0) {     
     selection -= 1;
-    drawScreen();
+    selectDrinkScreen();
     delay(500);
-  } else if (yPosition > downThreshold && selection < (MAX_DRINKS - 1)) {    
+  } else if (yPosition > downThreshold && selection < lastDrinkId()) {    
     selection += 1;
-    drawScreen();
+    selectDrinkScreen();
     delay(500);
   } else if (clicked == 0) {
     confirmationScreen();
-    drawScreen();
+    selectDrinkScreen();
     delay(500);
   } else if (xPosition > rightThreshold) {
-    pumpOn(0);
-    pumpOn(1);
+    for(int i = 0; i < PUMPS; i++) pumpOn(i);
     delay(1000);
-
-    pumpOff(0);
-    pumpOff(1);
+    for(int i = 0; i < PUMPS; i++) pumpOff(i);
   } else if (xPosition < leftThreshold) {
-    pumpReverse(0);
-    pumpReverse(1);
+    for(int i = 0; i < PUMPS; i++) pumpReverse(i);
     delay(1000);
-
-    pumpOff(0);
-    pumpOff(1);
+    for(int i = 0; i < PUMPS; i++) pumpOff(i);
   }
 
   delay(10);
@@ -93,7 +86,7 @@ void confirmationScreen()
 
     if (clicked == 0) {
       if (select == 1) {
-        pour();
+        pour(drinks[selection], lcd);
       }
       return;
     } else if (xPosition > rightThreshold) {
@@ -110,7 +103,7 @@ void confirmationScreen()
   }
 }
 
-void drawScreen()
+void selectDrinkScreen()
 {
   int drink;
 
@@ -127,7 +120,7 @@ void drawScreen()
   lcd.print(">");
   for(int i = 0; i < 3; i++) {
     drink = selection - 1 + i;
-    if (drink >= 0 && drink < (MAX_DRINKS)) {
+    if (drink >= 0 && drink <= lastDrinkId()) {
       lcd.setCursor(1, i+1);
       lcd.print(drinks[drink].name);
     }
@@ -150,24 +143,6 @@ void welcomeScreen()
 }
 
 
-void pour()
-{
-  // TODO: rewrite
-  lcd.clear();
-
-  lcd.setCursor(0,0);
-  lcd.print("Mixing ...");
-  lcd.setCursor(0,1);
-  lcd.print(drinks[selection].name);
-
-  dispense(drinks[selection]);
-
-  for(int i=0; i < 20; i++) {
-    lcd.setCursor(i,3);
-    lcd.print('>');
-    delay(200);
-  }
-}
 
 void readJoystick()
 {
