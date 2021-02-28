@@ -11,4 +11,3 @@ void readJoystick()
   xPosition = analogRead(xAxis);
   clicked = digitalRead(joyClick);
 }
-
