@@ -1,18 +1,18 @@
 #include <Arduino.h>
-#include "menu.h"
 #include "mixer.h"
 #include "joystick.h"
 #include "drinks_menu.h"
+#include "developer_menu.h"
 
 DrinksMenu::DrinksMenu() {
-  menuTitle = "Select a drink:";
+  title = "Select a drink:";
 }
 
 void DrinksMenu::addDrink(Cocktail drink)
 {
-  drinks[menuItems] = drink;
-  options[menuItems] = drink.name;
-  menuItems++;
+  drinks[itemCount] = drink;
+  items[itemCount] = drink.name;
+  itemCount++;
 }
 
 void DrinksMenu::selectItem()
@@ -56,5 +56,13 @@ void DrinksMenu::selectItem()
 
     delay(50);
   }
+}
+
+void DrinksMenu::selectSecretItem() 
+{
+  DeveloperMenu devMenu;
+  devMenu.lcd = lcd;
+  devMenu.start();
+  //maintenanceMenu();
 }
 

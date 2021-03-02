@@ -12,4 +12,5 @@ public:
 protected:  
   Cocktail drinks[MAX_DRINKS];  
   void selectItem();  
+  void selectSecretItem();
 };

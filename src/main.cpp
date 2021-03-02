@@ -2,7 +2,6 @@
 #include "pumps.h"
 #include "mixer.h"
 #include "joystick.h"
-#include "maintenance.h"
 #include "lcd.h"
 #include "drinks_menu.h"
 #include <Wire.h>
@@ -17,9 +16,6 @@ void confirmationScreen();
 void readJoystick();
 void welcomeScreen();
 
-
-Menu myMenu;
-
 void setup()
 {
   Serial.begin(115200);
@@ -31,7 +27,6 @@ void setup()
   setupLcd();
   welcomeScreen();
 }
-
 
 void loop()
 {
