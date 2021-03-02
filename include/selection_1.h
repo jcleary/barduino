@@ -18,4 +18,7 @@ void loadDrinks()
   addDrink({"Barduino Hurricane", {{rum, 50}, {vodka, 50}, {lime_juice, 25}, {orange, 225}, {grenadine, 12}}});
   addDrink({"Orange Daiquir", {{rum, 60}, {orange, 20}, {grenadine, 10}, {lime_juice, 15}}});
   addDrink({"Tequila Sunrise", {{tequila, 50}, {orange, 100}, {grenadine, 30}, {lime_juice, 20}}});
+  addDrink({"Sex in McDs Bathroo", {{vodka, 50}, {triple_sec, 50}, {peach_schnapps, 50}, {orange, 150}, {grenadine, 12}, {lime_juice, 25}}});
+
+
 };

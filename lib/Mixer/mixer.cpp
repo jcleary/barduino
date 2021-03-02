@@ -36,6 +36,7 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
   lcd.print(drink.name);
 
   int pumps[PUMPS] = {};
+  int mods[PUMPS] = {};
 
   int maxVolume = 0;
 
@@ -44,7 +45,7 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
   for (byte i = 0; i < MAX_INGREDIENTS; i++)
   {
     int pumpNo = drink.recipe[i][0];
-    int mls = drink.recipe[i][1];
+    int mls = drink.recipe[i][1];    
 
     if (mls > 0)
     {
@@ -56,18 +57,25 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
     }
   }
 
+  for (byte i=0; i < PUMPS; i++) {
+    if (pumps[i] > 0) {
+      mods[i] = maxVolume / pumps[i];
+      Serial.println("Pump no " + String(i) + " has a mod of " + String(mods[i]));
+    }
+  }
+
   Serial.println("maxVolume: " + String(maxVolume));
 
   // start pumps
-  for (byte i = 0; i < PUMPS; i++)
-  {
-    if (pumps[i] > 0)
-    {
-      pumpOn(i);
-    }
-    // debug info show how much each pump will dispense
-    Serial.println("pumping pump no " + String(i) + " for " + String(pumps[i]) + "ml");
-  }
+  // for (byte i = 0; i < PUMPS; i++)
+  // {
+  //   if (pumps[i] > 0)
+  //   {
+  //     pumpOn(i);
+  //   }
+  //   // debug info show how much each pump will dispense
+  //   Serial.println("pumping pump no " + String(i) + " for " + String(pumps[i]) + "ml");
+  // }
 
   for (int i = maxVolume; i > 0; i--)
   {
@@ -77,18 +85,21 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
 
     delay(MILLISECONDS_TO_MLS);
 
-    for (byte i = 0; i < PUMPS; i++)
+    for (byte p = 0; p < PUMPS; p++)
     {
-      if (pumps[i] > 0)
-      {
-        pumps[i]--;
-
-        if (pumps[i] == 0)
-        {
-          Serial.println("Stopping pump " + String(i));
-          pumpOff(i);
-        }
+      if((pumps[p] > 0) && ((i % mods[p]) == 0)) {
+        pumps[p]--;
+        pumpOn(p);
+        // Serial.println("Pump " + String(p) + " on, " + String(pumps[p]) + "ml remaining");
+      } else {
+        pumpOff(p);
       }
     }
+    // Serial.println("----------");
   }
+
+  for (byte p = 0; p < PUMPS; p++){
+    pumpOff(p);
+  }
+
 }
