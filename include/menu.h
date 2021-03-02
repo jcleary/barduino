@@ -7,14 +7,15 @@ class Menu
 public:  
   void start();
   void refreshMenu();
-  virtual void selectItem() {} ;
-  virtual void selectSecretItem() {} ;
   LiquidCrystal_I2C * lcd;
 
 protected:
+  virtual void selectItem() {} ;
+  virtual void selectSecretItem() {} ;
   int selection = 0;
-  int menuItems = 0;
-  String options[10];
-  String menuTitle;
+  int itemCount = 0;
+  int exitItemNo = -1;
+  String items[10];
+  String title;
   
 };

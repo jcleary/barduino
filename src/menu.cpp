@@ -5,7 +5,7 @@
 
 void Menu::start()
 {
-  Serial.println("menuItems: "  +String(menuItems));
+  Serial.println("menuItems: "  +String(itemCount));
   refreshMenu();
 
   while (true)
@@ -18,7 +18,7 @@ void Menu::start()
       refreshMenu();
       delay(200);
     }
-    else if (yPosition > downThreshold && selection < (menuItems -1))
+    else if (yPosition > downThreshold && selection < (itemCount -1))
     {
       selection += 1;
       refreshMenu();
@@ -27,6 +27,9 @@ void Menu::start()
     else if (clicked == 0)
     {
       waitForDepress();
+      if (selection == exitItemNo) {
+        return;
+      }
       selectItem();
       refreshMenu();
     }
@@ -54,21 +57,21 @@ void Menu::refreshMenu()
 {
   // debug info
   Serial.print("Selection: " + String(selection));  
-  Serial.println(" " + options[selection]);
+  Serial.println(" " + items[selection]);
 
   lcd->clear();
   lcd->setCursor(0, 0);
-  lcd->print(menuTitle);
+  lcd->print(title);
 
   lcd->setCursor(0, 2);
   lcd->print(">");
   for (int i = 0; i < 3; i++)
   {
     int item = selection - 1 + i;
-    if (item >= 0 && item < menuItems)
+    if (item >= 0 && item < itemCount)
     {
       lcd->setCursor(1, i + 1);
-      lcd->print(options[item]);
+      lcd->print(items[item]);
     }
   }
 }
