@@ -7,23 +7,6 @@ Cocktail drinks[MAX_DRINKS];
 
 int nextDrink = 0;
 
-void addDrink(Cocktail newDrink);
-
-void loadDrinks()
-{
-  addDrink({"Vodka & Orange", {{vodka, 50}, {orange, 280}}});
-  addDrink({"Gin & Tonic", {{gin, 50}, {tonic, 280}}});
-  addDrink({"Sex On The Beach", {{vodka, 50}, {peach_schnapps, 25}, {cranberry, 50}, {orange, 140}}});
-  addDrink({"100m Tonic", {{tonic, 100}}});
-  addDrink({"100m OJ", {{orange, 100}}});
-  addDrink({"25ml Peach Schnaps", {{peach_schnapps, 25}}});
-  // addDrink({"Margarita", {}});
-  // addDrink({"Cosmopolitan", {}});
-  // addDrink({"Mojito", {}});
-  // addDrink({"Old Fashioned", {}});
-  // addDrink({"Bellini", {}});
-};
-
 void addDrink(Cocktail newDrink)
 {
   if (nextDrink >= MAX_DRINKS)

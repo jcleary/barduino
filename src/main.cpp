@@ -4,8 +4,11 @@
 #include "joystick.h"
 #include "maintenance.h"
 #include "lcd.h"
+#include "drinks_menu.h"
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+
+#include "selection_1.h"
 
 int selection = 0;
 
@@ -14,136 +17,29 @@ void confirmationScreen();
 void readJoystick();
 void welcomeScreen();
 
+
+Menu myMenu;
+
 void setup()
 {
   Serial.begin(115200);
+  Serial.println("Booting...");
   pinMode(joyClick, INPUT_PULLUP);
 
   setupPumps();
   loadDrinks();
   setupLcd();
   welcomeScreen();
-  selectDrinkScreen();
 }
+
 
 void loop()
 {
-  readJoystick();
-
-  if (yPosition < upThreshold && selection > 0)
-  {
-    selection -= 1;
-    selectDrinkScreen();
-    delay(200);
-  }
-  else if (yPosition > downThreshold && selection < lastDrinkId())
-  {
-    selection += 1;
-    selectDrinkScreen();
-    delay(200);
-  }
-  else if (clicked == 0)
-  {
-    waitForDepress();
-    confirmationScreen();
-    selectDrinkScreen();
-  }
-  else if (xPosition > rightThreshold)
-  {
-    int i = 300;
-    do
-    {
-      readJoystick();
-      i--;
-      delay(10);
-    } while (i > 0 && xPosition > rightThreshold);
-    if (i == 0)
-    {
-      maintenanceMenu();
-      selectDrinkScreen();
-    }
-
-    // for(int i = 0; i < PUMPS; i++) pumpOff(i);
-  }
-  else if (xPosition < leftThreshold)
-  {
-    for (int i = 0; i < PUMPS; i++)
-      pumpReverse(i);
-    delay(1000);
-    for (int i = 0; i < PUMPS; i++)
-      pumpOff(i);
-  }
-
-  delay(10);
-}
-
-void confirmationScreen()
-{
-  int select = 1;
-
-  lcd.clear();
-
-  lcd.setCursor((20 - drinks[selection].name.length()) / 2, 0);
-  lcd.print(drinks[selection].name);
-
-  lcd.setCursor(3, 2);
-  lcd.print("[Hit me] Back ");
-
-  delay(500);
-  while (true)
-  {
-    readJoystick();
-
-    if (clicked == 0)
-    {
-      waitForDepress();
-      if (select == 1)
-      {
-        pour(drinks[selection], lcd);
-      }
-      return;
-    }
-    else if (xPosition > rightThreshold)
-    {
-      select = 0;
-      lcd.setCursor(3, 2);
-      lcd.print(" Hit me [Back]");
-    }
-    else if (xPosition < leftThreshold)
-    {
-      select = 1;
-      lcd.setCursor(3, 2);
-      lcd.print("[Hit me] Back ");
-    }
-
-    delay(50);
-  }
-}
-
-void selectDrinkScreen()
-{
-  int drink;
-
-  // debug info
-  Serial.print("Selection: ");
-  Serial.print(selection);
-  Serial.println(" " + drinks[selection].name);
-
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Select a drink:");
-
-  lcd.setCursor(0, 2);
-  lcd.print(">");
-  for (int i = 0; i < 3; i++)
-  {
-    drink = selection - 1 + i;
-    if (drink >= 0 && drink <= lastDrinkId())
-    {
-      lcd.setCursor(1, i + 1);
-      lcd.print(drinks[drink].name);
-    }
-  }
+  DrinksMenu drinksMenu;
+  drinksMenu.lcd = &lcd;  
+  for(int i=0; i <= lastDrinkId(); i++) 
+    drinksMenu.addDrink(drinks[i]);  
+  drinksMenu.start();
 }
 
 void welcomeScreen()

@@ -14,6 +14,6 @@ struct Cocktail
 
 extern Cocktail drinks[MAX_DRINKS];
 
-void loadDrinks();
 void pour(Cocktail drink, LiquidCrystal_I2C lcd);
 int lastDrinkId();
+void addDrink(Cocktail newDrink);

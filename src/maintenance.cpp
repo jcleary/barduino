@@ -48,6 +48,7 @@ void maintenanceMenu()
       case 2:
         return;
       }
+      drawMaintenanceMenu(selection);
     }
 
   } while (true);
@@ -117,3 +118,5 @@ void purgeAllPumps()
   for (byte i = 0; i < PUMPS; i++)
     pumpOff(i);
 }
+
+
