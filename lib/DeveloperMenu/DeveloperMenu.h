@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include "menu.h"
+#include <Menu.h>
 
 class DeveloperMenu : public Menu
 {

@@ -1,11 +1,9 @@
 #include <Arduino.h>
-#include "pumps.h"
-#include "mixer.h"
-#include "joystick.h"
-#include "lcd.h"
-#include "drinks_menu.h"
+#include <Pumps.h>
+#include <Joystick.h>
+#include <Lcd.h>
+#include <DrinksMenu.h>
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
 
 #include "selection_1.h"
 

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-#include "joystick.h"
-#include "menu.h"
+#include <Joystick.h>
+#include <Menu.h>
 
 void Menu::start()
 {

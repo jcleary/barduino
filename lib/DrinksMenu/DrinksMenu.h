@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
-#include "mixer.h"
-#include "menu.h"
+#include <Mixer.h>
+#include <Menu.h>
 
 class DrinksMenu : public Menu
 {

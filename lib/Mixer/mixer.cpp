@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "pumps.h"
-#include "mixer.h"
+#include <Pumps.h>
+#include <Mixer.h>
 #include <Wire.h>
 
 Cocktail drinks[MAX_DRINKS];

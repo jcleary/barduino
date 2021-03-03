@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "joystick.h"
+#include <Joystick.h>
 
 int clicked;
 int yPosition;

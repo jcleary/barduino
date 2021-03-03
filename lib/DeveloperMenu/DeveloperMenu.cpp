@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "developer_menu.h"
-#include "joystick.h"
-#include "pumps.h"
+#include <DeveloperMenu.h>
+#include <Joystick.h>
+#include <Pumps.h>
 
 DeveloperMenu::DeveloperMenu()
 {

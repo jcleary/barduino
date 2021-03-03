@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "pumps.h"
+#include <Pumps.h>
 
 byte pumpPin1(byte pumpNo);
 byte pumpPin2(byte pumpNo);

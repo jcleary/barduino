@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include "mixer.h"
-#include "joystick.h"
-#include "drinks_menu.h"
-#include "developer_menu.h"
+#include <Mixer.h>
+#include <Joystick.h>
+#include <DrinksMenu.h>
+#include <DeveloperMenu.h>
 
 DrinksMenu::DrinksMenu() {
   title = "Select a drink:";
