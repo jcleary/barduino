@@ -27,6 +27,12 @@ void pumpOff(byte pumpNo)
   digitalWrite(pumpPin2(pumpNo), LOW);
 }
 
+void allPumpOff()
+{
+  for (byte i = 0; i < PUMPS; i++)
+    pumpOff(i);
+}
+
 void pumpReverse(byte pumpNo)
 {
   Serial.println("Pump " + String(pumpNo) + " reverse");

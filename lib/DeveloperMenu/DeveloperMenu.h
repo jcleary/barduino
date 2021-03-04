@@ -9,6 +9,5 @@ public:
   
 protected:    
   void selectItem();  
-  void primeAllPumps();
-  void purgeAllPumps();  
+  void showPumpMenu(String verb);
 };

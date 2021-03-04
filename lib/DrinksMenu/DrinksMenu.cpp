@@ -4,7 +4,8 @@
 #include <DrinksMenu.h>
 #include <DeveloperMenu.h>
 
-DrinksMenu::DrinksMenu() {
+DrinksMenu::DrinksMenu()
+{
   title = "Select a drink:";
 }
 
@@ -58,11 +59,10 @@ void DrinksMenu::selectItem()
   }
 }
 
-void DrinksMenu::selectSecretItem() 
+void DrinksMenu::selectSecretItem()
 {
   DeveloperMenu devMenu;
   devMenu.lcd = lcd;
   devMenu.start();
   //maintenanceMenu();
 }
-
