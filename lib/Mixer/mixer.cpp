@@ -17,6 +17,7 @@ void addDrink(Cocktail newDrink)
   {
     Serial.println("Adding " + newDrink.name);
     drinks[nextDrink] = newDrink;
+    Serial.println(newDrink.aftershot.mls);
     nextDrink++;
   }
 }
@@ -36,16 +37,16 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
   lcd.print(drink.name);
 
   int pumps[PUMPS] = {};
-  int mods[PUMPS] = {};
+  int ratios[PUMPS] = {};
 
   int maxVolume = 0;
 
   // sets the number of mls each pump has to dispense
-  // also works out the macVolume so we can count down
+  // also works out the maxVolume so we can count down
   for (byte i = 0; i < MAX_INGREDIENTS; i++)
   {
-    int pumpNo = drink.recipe[i][0];
-    int mls = drink.recipe[i][1];    
+    int pumpNo = drink.recipe[i].pumpNo;
+    int mls = drink.recipe[i].mls;
 
     if (mls > 0)
     {
@@ -56,26 +57,17 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
       }
     }
   }
-
-  for (byte i=0; i < PUMPS; i++) {
-    if (pumps[i] > 0) {
-      mods[i] = maxVolume / pumps[i];
-      Serial.println("Pump no " + String(i) + " has a mod of " + String(mods[i]));
-    }
-  }
-
   Serial.println("maxVolume: " + String(maxVolume));
 
-  // start pumps
-  // for (byte i = 0; i < PUMPS; i++)
-  // {
-  //   if (pumps[i] > 0)
-  //   {
-  //     pumpOn(i);
-  //   }
-  //   // debug info show how much each pump will dispense
-  //   Serial.println("pumping pump no " + String(i) + " for " + String(pumps[i]) + "ml");
-  // }
+  // calculates the ratios so that pumps can be pulsed to help with mixing
+  for (byte i = 0; i < PUMPS; i++)
+  {
+    if (pumps[i] > 0)
+    {
+      ratios[i] = maxVolume / pumps[i];
+      Serial.println("Pump no " + String(i) + " has a mod of " + String(ratios[i]));
+    }
+  }
 
   for (int i = maxVolume; i > 0; i--)
   {
@@ -87,19 +79,26 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
 
     for (byte p = 0; p < PUMPS; p++)
     {
-      if((pumps[p] > 0) && ((i % mods[p]) == 0)) {
+      if ((pumps[p] > 0) && ((i % ratios[p]) == 0))
+      {
         pumps[p]--;
         pumpOn(p);
-        // Serial.println("Pump " + String(p) + " on, " + String(pumps[p]) + "ml remaining");
-      } else {
+      }
+      else
+      {
         pumpOff(p);
       }
     }
-    // Serial.println("----------");
   }
 
-  for (byte p = 0; p < PUMPS; p++){
-    pumpOff(p);
-  }
+  allPumpOff();
 
+  // aftershot
+  if (drink.aftershot.mls > 0)
+  {
+    Serial.println("Pumping aftershot through pump " + String(pumpNo));
+    pumpOn(drink.aftershot.pumpNo);
+    delay(MILLISECONDS_TO_MLS * drink.aftershot.mls);
+    pumpOff(drink.aftershot.pumpNo);
+  }
 }

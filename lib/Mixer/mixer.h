@@ -4,13 +4,21 @@
 
 const int MAX_DRINKS = 12;
 const int MAX_INGREDIENTS = 6;
-const int MILLISECONDS_TO_MLS = 700;
+const int MILLISECONDS_TO_MLS = 70;
+
+struct Ingredient
+{
+  int pumpNo;
+  int mls;
+};
 
 struct Cocktail
 {
   String name;
-  int recipe[MAX_INGREDIENTS][2];
+  Ingredient recipe[MAX_INGREDIENTS];
+  Ingredient aftershot;
 };
+
 
 extern Cocktail drinks[MAX_DRINKS];
 

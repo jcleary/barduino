@@ -13,12 +13,11 @@ const byte grenadine = 7;
 
 void loadDrinks()
 {
-  addDrink({"Vodka & Orange", {{vodka, 50}, {orange, 280}}});
-  addDrink({"Margarita", {{tequila, 50}, {triple_sec, 20}, {lime_juice, 25}}});
-  addDrink({"Barduino Hurricane", {{rum, 50}, {vodka, 50}, {lime_juice, 25}, {orange, 225}, {grenadine, 12}}});
-  addDrink({"Orange Daiquir", {{rum, 60}, {orange, 20}, {grenadine, 10}, {lime_juice, 15}}});
-  addDrink({"Tequila Sunrise", {{tequila, 50}, {orange, 100}, {grenadine, 30}, {lime_juice, 20}}});
-  addDrink({"Sex in McDs Bathroo", {{vodka, 50}, {triple_sec, 50}, {peach_schnapps, 50}, {orange, 150}, {grenadine, 12}, {lime_juice, 25}}});
-
-
-};
+  addDrink({.name = "Vodka & Orange",      .recipe = {{vodka, 50}, {orange, 280}}});
+  addDrink({.name = "Margarita",           .recipe = {{tequila, 50}, {triple_sec, 20}, {lime_juice, 25}}});
+  addDrink({.name = "Barduino Hurricane",  .recipe = {{rum, 50}, {vodka, 50}, {lime_juice, 25}, {orange, 225}}, .aftershot = {grenadine, 12}});
+  addDrink({.name = "Orange Daiquir",      .recipe = {{rum, 60}, {orange, 20}, {lime_juice, 15}},               .aftershot = {grenadine, 10}});
+  addDrink({.name = "Tequila Sunrise",     .recipe = {{tequila, 50}, {orange, 100}, {lime_juice, 20}},          .aftershot = {grenadine, 30}});
+  addDrink({.name = "Sex in McDs Bathroo", .recipe = {{vodka, 50}, {triple_sec, 50}, {peach_schnapps, 50}, {orange, 150}, {lime_juice, 25}}, .aftershot = {grenadine, 12}});
+  
+}
