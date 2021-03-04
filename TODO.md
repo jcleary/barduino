@@ -1,7 +1,6 @@
 # TODO
 
-
-- prime individual pumps
+- taster shot
 - 5v power supply
 - design and build enclosure
 - get final list of cocktails
