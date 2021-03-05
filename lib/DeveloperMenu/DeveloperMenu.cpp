@@ -29,7 +29,7 @@ void DeveloperMenu::selectItem()
 
 void DeveloperMenu::showPumpMenu(String verb)
 {
-  PumpMenu menu("Purge");
+  PumpMenu menu(verb);
   menu.lcd = lcd;
   menu.start();
 }
