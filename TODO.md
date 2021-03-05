@@ -1,16 +1,13 @@
-# TODO
-
+# TODO - Code
 - taster shot
-- 5v power supply
+- improve menu so that arrow can move down screen and menu scrolls only when needed
+- disable missing ingredients via menu - remove unavailable cocktails from the menu
+- convert Cocktail to class
+
+# TODO - Machine
+- plump in power supply
 - design and build enclosure
 - get final list of cocktails
-- remove breadboard (maybe get PCB)
 
-- switches for missing drinks - remove them from the menu
-
-
-# Suggestions
-
+# Other suggestions
 - NFC tag for developer settings
-- add "aftershot" (for grenadine mainly)
-- 
