@@ -4,7 +4,7 @@
 
 const int MAX_DRINKS = 12;
 const int MAX_INGREDIENTS = 6;
-const int MILLISECONDS_TO_MLS = 70;
+const int MILLISECONDS_TO_MLS = 700;
 
 struct Ingredient
 {
