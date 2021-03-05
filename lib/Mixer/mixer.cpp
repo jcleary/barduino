@@ -96,7 +96,7 @@ void pour(Cocktail drink, LiquidCrystal_I2C lcd)
   // aftershot
   if (drink.aftershot.mls > 0)
   {
-    Serial.println("Pumping aftershot through pump " + String(pumpNo));
+    Serial.println("Pumping aftershot through pump " + String(drink.aftershot.pumpNo));
     pumpOn(drink.aftershot.pumpNo);
     delay(MILLISECONDS_TO_MLS * drink.aftershot.mls);
     pumpOff(drink.aftershot.pumpNo);
