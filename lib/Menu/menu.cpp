@@ -15,12 +15,18 @@ void Menu::start()
     if (yPosition < upThreshold && selection > 0)
     {
       selection -= 1;
+      if (selection < offset) {
+        offset = selection;
+      }
       refreshMenu();
       delay(200);
     }
     else if (yPosition > downThreshold && selection < (itemCount -1))
     {
       selection += 1;
+      if (selection > (offset + 2)) {
+        offset = selection - 2;
+      }
       refreshMenu();
       delay(200);
     }
@@ -63,15 +69,15 @@ void Menu::refreshMenu()
   lcd->setCursor(0, 0);
   lcd->print(title);
 
-  lcd->setCursor(0, 2);
-  lcd->print(">");
-  for (int i = 0; i < 3; i++)
+  for(int i = 0; i < 3; i++)
   {
-    int item = selection - 1 + i;
-    if (item >= 0 && item < itemCount)
-    {
-      lcd->setCursor(1, i + 1);
-      lcd->print(items[item]);
+    int item = i + offset;
+    lcd->setCursor(1, i + 1);
+    lcd->print(items[item]);
+
+    if (item == selection) { 
+      lcd->setCursor(0, i + 1);
+      lcd->print(">");
     }
   }
 }

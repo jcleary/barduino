@@ -12,6 +12,7 @@ public:
 protected:
   virtual void selectItem() {} ;
   virtual void selectSecretItem() {} ;
+  int offset = 0;
   int selection = 0;
   int itemCount = 0;
   int exitItemNo = -1;
