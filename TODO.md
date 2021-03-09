@@ -1,6 +1,7 @@
 # TODO - Code
-- taster shot
+
 - improve menu so that arrow can move down screen and menu scrolls only when needed
+- taster shot
 - disable missing ingredients via menu - remove unavailable cocktails from the menu
 - convert Cocktail to class
 
