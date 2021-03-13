@@ -4,11 +4,13 @@
 #include <PumpMenu.h>
 #include <Pumps.h>
 
-PumpMenu::PumpMenu(String verb) {
+PumpMenu::PumpMenu(String verb)
+{
   this->verb = verb;
   title = verb + " menu";
 
-  for(byte i=0; i < PUMPS; i++) {
+  for (byte i = 0; i < PUMPS; i++)
+  {
     items[itemCount++] = verb + " " + String(i);
   }
   items[itemCount++] = verb + " all";
@@ -25,15 +27,15 @@ void PumpMenu::selectItem()
   lcd->setCursor(6, 3);
   lcd->print("[ Stop ]");
 
-  if (selection < PUMPS) {
-    pumpOn(selection);
-  } else {
-    for (byte i = 0; i < PUMPS; i++) {
-      if (verb == "Prime") {         
-        pumpOn(i);
-      } else {
-        pumpReverse(i);
-      }
+  if (selection < PUMPS)
+  {
+    startPump(selection);
+  }
+  else
+  {
+    for (byte i = 0; i < PUMPS; i++)
+    {
+      startPump(i);
     }
   }
 
@@ -46,3 +48,14 @@ void PumpMenu::selectItem()
   allPumpOff();
 }
 
+void PumpMenu::startPump(int pumpNo)
+{
+  if (verb == "Prime")
+  {
+    pumpOn(pumpNo);
+  }
+  else
+  {
+    pumpReverse(pumpNo);
+  }
+}

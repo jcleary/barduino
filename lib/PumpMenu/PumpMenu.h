@@ -9,5 +9,6 @@ public:
 
 protected:  
   void selectItem();    
+  void startPump(int pumpNo);
   String verb;
 };
