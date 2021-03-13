@@ -11,7 +11,7 @@ PumpMenu::PumpMenu(String verb)
 
   for (byte i = 0; i < PUMPS; i++)
   {
-    items[itemCount++] = verb + " " + String(i);
+    items[itemCount++] = verb + " " + String(i) + " " + pumps[i].name.substring(0, 10);
   }
   items[itemCount++] = verb + " all";
   items[itemCount++] = "Exit";
@@ -21,7 +21,7 @@ PumpMenu::PumpMenu(String verb)
 void PumpMenu::selectItem()
 {
   lcd->clear();
-  lcd->setCursor(6, 1);
+  lcd->setCursor((20-items[selection].length())/2, 1);
   lcd->print(items[selection]);
 
   lcd->setCursor(6, 3);
