@@ -1,12 +1,12 @@
 #pragma once
 #include <Arduino.h>
+#include <Pump.h>
 
 const int PUMPS = 8;
 
-const byte pump0pin0 = 30;
+extern Pump pumps[PUMPS];
 
-void setupPumps();
 void pumpOn(byte pumpNo);
 void pumpOff(byte pumpNo);
-void allPumpOff();
 void pumpReverse(byte pumpNo);
+void allPumpOff();

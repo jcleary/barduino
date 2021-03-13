@@ -1,6 +1,7 @@
 #pragma once
 #include <Arduino.h>
-#include "mixer.h"
+#include <Mixer.h>
+#include <Pumps.h>
 
 const byte vodka = 0;
 const byte peach_schnapps = 1;
@@ -11,8 +12,18 @@ const byte lime_juice = 5;
 const byte orange = 6;
 const byte grenadine = 7;
 
+
 void loadDrinks()
 {
+  pumps[vodka].init("Vodka", vodka);
+  pumps[peach_schnapps].init("Peach schnapps", peach_schnapps);
+  pumps[triple_sec].init("Triple sec", triple_sec);
+  pumps[tequila].init("Tequila", tequila);
+  pumps[rum].init("Rum", rum);
+  pumps[lime_juice].init("Lime juice", lime_juice);
+  pumps[orange].init("Orange", orange);
+  pumps[grenadine].init("Grenadine", grenadine);
+
   addDrink({.name = "Barduino Hurricane", .recipe = {{rum, 50}, {vodka, 50}, {lime_juice, 25}, {orange, 225}}, .aftershot = {grenadine, 12}});
   addDrink({.name = "Blood Test (shot)",  .recipe = {{tequila, 25}, {grenadine, 25}}});  
   addDrink({.name = "Hairy Navel",        .recipe = {{vodka, 30}, {orange, 70}, {peach_schnapps, 50}}});

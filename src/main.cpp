@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Pumps.h>
+#include <Pump.h>
 #include <Joystick.h>
 #include <Lcd.h>
 #include <DrinksMenu.h>
@@ -20,7 +21,6 @@ void setup()
   Serial.println("Booting...");
   pinMode(joyClick, INPUT_PULLUP);
 
-  setupPumps();
   loadDrinks();
   setupLcd();
   welcomeScreen();
