@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Pump.h>
 
-Pump::Pump(String name, int pumpNo)
+void Pump::init(String name, int pumpNo)
 {
   this->name = name;
   this->pumpNo = pumpNo;

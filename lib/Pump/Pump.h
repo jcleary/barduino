@@ -4,7 +4,7 @@
 class Pump
 {
 public:  
-  Pump(String name, int pumpNo);
+  void init(String name, int pumpNo);
   String name;  
   int pumpNo;  
   void on();
